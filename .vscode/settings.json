@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "requires_hosted.h": "c"
+        "requires_hosted.h": "c",
+        "stdint.h": "c",
+        "wchar.h": "c"
     }
 }
