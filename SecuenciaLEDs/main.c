@@ -1,3 +1,6 @@
+#include "mbed.h"
+#include <stdint.h>
+
 const int16_t LED_GREEN = 7;
 const int16_t LED_YELLOW = 6;
 const int16_t LED_RED = 5;
