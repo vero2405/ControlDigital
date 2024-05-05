@@ -23,7 +23,7 @@ control_leds leds[] = {
     {LED_BLUE, false}
 };
 
-volatile uint8_t current_led_index = 0;
+volatile uint8_t current_led_index = 1;
 volatile uint8_t direction_forward = 1;
 
 void setup() {
@@ -74,13 +74,14 @@ ISR(TIMER1_COMPA_vect) {
         Time200ms();
     }
 
+    activate_led(leds[current_led_index-1].pin); // Encender el siguiente LED
+
     current_led_index += direction_forward;
-    if (current_led_index > 3) {
-    current_led_index = 0;
-    } else if (current_led_index < 0) {
-    current_led_index = 3;
+    if (current_led_index > 4) {
+    current_led_index = 1;
+    } else if (current_led_index == 0) {
+    current_led_index = 4;
     }
-    activate_led(leds[current_led_index].pin); // Encender el siguiente LED
 }
 
 // Función para encender un LED y apagar los demás
