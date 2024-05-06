@@ -94,7 +94,7 @@ void activate_led(uint8_t pin) {
 
 // Rutina de interrupción para cambiar la dirección de la secuencia
 void cambiodireccion() {
-    direction_forward *= -1; // Cambiar dirección signo -
+    direction_forward = -1; // Cambiar dirección signo -
 }
 
 // Rutina de interrupción para resetear la dirección de la secuencia
