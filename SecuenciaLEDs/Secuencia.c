@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+// Definicion de pines a usar
 #define LED_GREEN 7
 #define LED_YELLOW 6
 #define LED_RED 5
