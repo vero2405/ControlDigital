@@ -12,7 +12,7 @@
 #define SW4 12
 
 typedef struct {
-    uint8_t pin;
+    uint8_t LED;
     bool state;
 } control_leds;
 
@@ -23,8 +23,8 @@ control_leds leds[] = {
     {LED_BLUE, false}
 };
 
-volatile int8_t current_led_index = 0;
-volatile int8_t direction_forward = 1;
+volatile int8_t current_led_index = 0;  // indice del led actual
+volatile int8_t current_direction = 1;  // direccion actual
 
 void setup() {
     pinMode(LED_GREEN, OUTPUT);
@@ -74,32 +74,32 @@ ISR(TIMER1_COMPA_vect) {
         Time200ms();
     }
 
-    current_led_index += direction_forward;
+    current_led_index += current_direction;
     if (current_led_index > 4) {
     current_led_index = 1;
     } else if (current_led_index < 1) {
     current_led_index = 4;
     }
 
-    activate_led(leds[current_led_index-1].pin); // Encender el siguiente LED
+    activate_led(leds[current_led_index-1].LED); // Encender el siguiente LED
 
 }
 
 // Función para encender un LED y apagar los demás
-void activate_led(uint8_t pin) {
+void activate_led(uint8_t LED) {
     for (int i = 0; i < sizeof(leds) / sizeof(leds[0]); ++i) {
-        digitalWrite(leds[i].pin, (leds[i].pin == pin) ? HIGH : LOW);
+        digitalWrite(leds[i].LED, (leds[i].LED == LED) ? HIGH : LOW);
     }
 }
 
 // Rutina de interrupción para cambiar la dirección de la secuencia
 void cambiodireccion() {
-    direction_forward = -1; // Cambiar dirección signo -
+    current_direction = -1; // Cambiar dirección signo -
 }
 
 // Rutina de interrupción para resetear la dirección de la secuencia
 void resetdireccion() {
-    direction_forward = 1; // Dirección inicial el signo +
+    current_direction = 1; // Dirección inicial el signo +
 }
 
 // Cambio de Tiempo a 200 ms
