@@ -63,7 +63,7 @@ void loop() {
 
 // Rutina de servicio de interrupción del Timer1
 ISR(TIMER1_COMPA_vect) {
-     // Cambio de Tiempo al pulsar SW
+    // Cambio de Tiempo al pulsar SW
     if (digitalRead(SW3)==LOW){
         Time200ms();
     } else if (digitalRead(SW4)==LOW){
