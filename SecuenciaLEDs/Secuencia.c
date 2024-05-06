@@ -53,9 +53,7 @@ void setup() {
     *TCCR1B_Ptr |= (1 << CS12) | (0 << CS11) | (1 << CS10); // prescaler: 1024
     *TIMSK1_Ptr |= (1 << OCIE1A); // habilita comparacion A
     sei();  // Permite las interrupciones
-    
-    // Encender el primer LED_GREEN
-    activate_led(LED_GREEN);
+
 }
 
 void loop() {
