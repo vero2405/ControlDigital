@@ -1,6 +1,4 @@
 #include <Arduino.h>
-#include <stdint.h>
-#include <stdbool.h>
 
 #define LED_GREEN 7
 #define LED_YELLOW 6
