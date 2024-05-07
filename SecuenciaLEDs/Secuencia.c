@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+// Definicion de pines a usar
 #define LED_GREEN 7
 #define LED_YELLOW 6
 #define LED_RED 5
@@ -63,7 +64,7 @@ void loop() {
 
 // Rutina de servicio de interrupción del Timer1
 ISR(TIMER1_COMPA_vect) {
-    // Cambio de Tiempo al pulsar SW
+     // Cambio de Tiempo al pulsar SW
     if (digitalRead(SW3)==LOW){
         Time200ms();
     } else if (digitalRead(SW4)==LOW){
