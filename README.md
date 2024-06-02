@@ -1,2 +1,9 @@
-La carpeta a presentar para la práctica 4 corresponde únicamente a Practica4_Leds. El cual se utilizó Platformio.
-El código de lenguaje C++ utilizado corresponde a Practica4_Leds/src/main.cpp
+Autores: Verónica Calderón - Alejandro Monge.
+
+La carpeta a presentar para la práctica 4 corresponde únicamente a Practica4_Leds. 
+
+Para la implementación del mismo, se usó Visual Studio Code cuyo módulo utilizado es Platformio.
+
+El código de lenguaje C++ utilizado corresponde a Practica4_Leds/src/main.cpp.
+
+El siguiente enlace, proporcionamos un pequeño video del funcionamiento de esta práctica: https://drive.google.com/file/d/1qz_WzXXYJfghzxOXFb1nlxeqeEtbg1PY/view?usp=sharing
