@@ -18,17 +18,40 @@ void actualizarMEF(){
     {
     case ESTADO_INICIAL:
         // Inicializar Hardware
-        // SW
+        Serial.println("estado Inicial");
+        pinMode(SW1,INPUT_PULLUP);
+        estadoActual = ESTADO_UP;  // Condicion de cambio (de momento)
         break;
     case ESTADO_UP:
-        
+        Serial.println("estado UP");
+        if (digitalReal(SW1)==0){
+            estadoActual = ESTADO_DOWN;
+        }
         break;
     case ESTADO_DOWN:
-        
+        Serial.println("estado DOWN");
+        if (digitalReal(SW1)==1){
+            estadoActual = ESTADO_UP;
+        }
         break;
     default:
         inicializarMEF();
         break;
     }
+    delay(100); // solo por el momento. Esto no se deberia de usar
 }
 
+//int main(){
+//    inicializarMEF();
+//    while(1){
+//        actualizarMEF();
+//    }
+//}
+
+void setup(){
+    inicializarMEF();
+    Serial.begin(11500);
+}
+void loop(){
+    actualizarMEF();
+}
