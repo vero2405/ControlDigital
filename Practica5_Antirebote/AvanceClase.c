@@ -1,9 +1,14 @@
 // cambio de estado activa para cambiar de estado (buttonUP a BUTTON falling)
 // para delay usar un callback buscar libreria
+
+#define SW1 7
+
 typedef enum {
     ESTADO_INICIAL,
     ESTADO_UP,
-    ESTADO_DOWN
+    ESTADO_FALLING,
+    ESTADO_DOWN,
+    ESTADO_RISING
 } estado_t;
 
 estado_t estadoActual;
@@ -14,6 +19,10 @@ void inicializarMEF(){
 }
 
 void actualizarMEF(){
+    int val = digitalRead(SW1);
+  static int prevVal = val;
+  bool cambio = val ^ prevVal;  // (^: XOR)
+
     switch (estadoActual)
     {
     case ESTADO_INICIAL:
@@ -24,14 +33,30 @@ void actualizarMEF(){
         break;
     case ESTADO_UP:
         Serial.println("estado UP");
-        if (digitalReal(SW1)==0){
+        estadoActual = ESTADO_FALLING;
+        break;
+    case ESTADO_FALLING:
+        Serial.println("estado FALLING");
+        //TIMER 40 MS
+        if(){
+            estadoActual = ESTADO_UP;
+        }
+        else{
             estadoActual = ESTADO_DOWN;
         }
         break;
     case ESTADO_DOWN:
         Serial.println("estado DOWN");
-        if (digitalReal(SW1)==1){
+        estadoActual = ESTADO_RISING;
+        break;
+    case ESTADO_RISING:
+        Serial.println("estado FALLING");
+        //TIMER 40 MS
+        if(){
             estadoActual = ESTADO_UP;
+        }
+        else{
+            estadoActual = ESTADO_DOWN;
         }
         break;
     default:
@@ -39,14 +64,8 @@ void actualizarMEF(){
         break;
     }
     delay(100); // solo por el momento. Esto no se deberia de usar
+    prevVal = val;
 }
-
-//int main(){
-//    inicializarMEF();
-//    while(1){
-//        actualizarMEF();
-//    }
-//}
 
 void setup(){
     inicializarMEF();
@@ -54,4 +73,17 @@ void setup(){
 }
 void loop(){
     actualizarMEF();
+}
+
+volatile uint16_t previousMillis = 0;  // Variable para almacenar el tiempo anterior
+volatile uint16_t currentMillis = millis();  // Obtener el tiempo actual en milisegundos
+
+void DetectorDurante40ms(){
+    if (currentMillis - previousMillis >= 40) {
+        previousMillis = currentMillis;  // Actualizar el tiempo anterior
+        // estado del pin
+        }
+    // activamos el flag
+
+    }
 }
