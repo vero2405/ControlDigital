@@ -1,6 +1,16 @@
 #include "pulsantes.h"
 #include <Arduino.h>
 
+// Para indicar si el SW está presionado LOW=0
+bool leeSW(int16_t sw){
+    return digitalRead(sw) == 0;
+}
+
+bool valSW(int16_t sw){
+    int val = digitalRead(sw);
+    return val;
+}
+
 
 void inicializarMEF(switch_t* sw) {
     sw->estadoActual = ESTADO_INICIAL;
@@ -20,11 +30,16 @@ void DetectorDurante40ms(switch_t* sw) {
         }
     }
 }
+switch_t switches[] = {
+    {SW1, ESTADO_INICIAL, 0},
+    {SW2, ESTADO_INICIAL, 0},
+    {SW3, ESTADO_INICIAL, 0},
+    {SW4, ESTADO_INICIAL, 0}
+};
 
 void actualizarMEF(switch_t* sw) {
     int val = digitalRead(sw->pin);
-    static int prevVal = val;
-    bool cambio = val ^ prevVal;  // (^: XOR)
+    int prevVal = val;
 
     switch (sw->estadoActual) {
     case ESTADO_INICIAL:

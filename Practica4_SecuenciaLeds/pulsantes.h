@@ -18,7 +18,8 @@ typedef struct {
     unsigned long previousMillis;
 } switch_t;
 
-
+bool leeSW(int16_t sw);
+bool valSW(int16_t sw);
 void inicializarMEF(switch_t* sw);
 void DetectorDurante40ms(switch_t* sw);
 void actualizarMEF(switch_t* sw);
