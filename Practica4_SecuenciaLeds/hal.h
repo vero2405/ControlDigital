@@ -1,28 +1,18 @@
-/*******************************************************************************
- * Copyright (c) 2015 Matthijs Kooijman
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * This the HAL to run LMIC on top of the Arduino environment.
- *******************************************************************************/
-#ifndef _hal_hal_h_
-#define _hal_hal_h_
+#ifndef __HAL_H
+#define __HAL_H_
 
-static const int NUM_DIO = 3;
+#include <stdint.h>
+#include <Arduino.h>
 
-struct lmic_pinmap {
-    u1_t nss;
-    u1_t rxtx;
-    u1_t rst;
-    u1_t dio[NUM_DIO];
-};
+#define LED_GREEN 7
+#define LED_YELLOW 6
+#define LED_RED 5
+#define LED_BLUE 4
 
-// Use this for any unused pins.
-const u1_t LMIC_UNUSED_PIN = 0xff;
 
-// Declared here, to be defined an initialized by the application
-extern const lmic_pinmap lmic_pins;
+#define SW1 2
+#define SW2 3
+#define SW3 11
+#define SW4 12
 
-#endif // _hal_hal_h_
+#endif
