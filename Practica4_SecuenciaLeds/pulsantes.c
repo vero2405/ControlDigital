@@ -6,12 +6,6 @@ bool leeSW(int16_t sw){
     return digitalRead(sw) == 0;
 }
 
-bool valSW(int16_t sw){
-    int val = digitalRead(sw);
-    return val;
-}
-
-
 void inicializarMEF(switch_t* sw) {
     sw->estadoActual = ESTADO_INICIAL;
     sw->previousMillis = 0;
