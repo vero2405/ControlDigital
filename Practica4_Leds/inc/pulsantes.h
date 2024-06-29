@@ -4,21 +4,14 @@
 #include <stdint.h>
 #include "hal.h"
 
-
 // Estructura para representar los pulsadores
 typedef struct {
     uint8_t SW;
     bool activacion;
 } control_pulsadores;
 
-control_pulsadores pulsadores[] = {
-    {SW1, false}, // SW1
-    {SW2, false}, // SW2
-    {SW3, false}, // SW3
-    {SW4, false} // SW4
-};
 
-extern control_pulsadores pulsadores[4];
+extern control_pulsadores pulsadores[];
 
 // Para antirebote mediante Maquina de Estado
 
@@ -36,9 +29,9 @@ typedef struct {
     unsigned long previousMillis;
 } switch_t;
 
-bool leeSW(int16_t sw);
 void inicializarMEF(switch_t* sw);
 void DetectorDurante40ms(switch_t* sw);
 void actualizarMEF(switch_t* sw);
+bool activar_sw(uint8_t SW);
 
 #endif

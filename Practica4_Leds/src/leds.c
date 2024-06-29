@@ -2,13 +2,18 @@
 #include "../inc/hal.h"
 #include <Arduino.h>
 
-volatile int8_t current_led_index = 0;  // Índice del LED actual
-volatile int8_t current_direction = 1;  // Dirección actual
+control_leds leds[] ={
+    {LED_GREEN, false},
+    {LED_YELLOW, false},
+    {LED_RED, false},
+    {LED_BLUE, false}
+};
+
+volatile int8_t actual_led_index = 0;  // Índice del LED actual
+volatile int8_t actual_direction = 1;  // Dirección actual
 volatile uint16_t previousMillis = 0;  // Variable para almacenar el tiempo anterior
 volatile uint16_t tiempo_encendido = 500; // Tiempo de encendido por defecto
 
-control_leds leds[4];
-control_pulsadores pulsadores[4];
 
 // Función para encender un LED
 bool activar_led(uint8_t LED) {
@@ -25,34 +30,18 @@ void desactivar_leds(uint8_t LED) {
     }
 }
 
-// Función para activar un pulsador
-bool activar_sw(uint8_t SW) {
-    bool presionado = digitalRead(SW) == LOW;  // Verificar si el pulsador está presionado
-    
-    for (int i = 0; i < 4; ++i) {
-        if (pulsadores[i].SW == SW) {
-            pulsadores[i].activacion = presionado;
-            //break; // Salir del bucle una vez que se ha encontrado el SW
-        } else {
-            pulsadores[i].activacion = false;
-        }
-    }
-    
-    return presionado;  // Devolver verdadero si el pulsador está presionado
-}
-
 // Función para cambiar el LED
 void cambiarLed() {
-    current_led_index += current_direction;  // Indica la direccion inicial (+1)
+    actual_led_index += actual_direction;  // Indica la direccion inicial (+1)
 
-    if (current_led_index > 3) {
-        current_led_index = 0;
-    } else if (current_led_index < 0) {
-        current_led_index = 3;
+    if (actual_led_index > 3) {
+        actual_led_index = 0;
+    } else if (actual_led_index < 0) {
+        actual_led_index = 3;
     }
 
     // Encender el siguiente LED
-    activar_led(leds[current_led_index].LED);
+    activar_led(leds[actual_led_index].LED);
     // Apagar los demás LEDs
-    desactivar_leds(leds[current_led_index].LED);
+    desactivar_leds(leds[actual_led_index].LED);
 }

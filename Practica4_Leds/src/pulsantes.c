@@ -2,9 +2,27 @@
 #include "../inc/hal.h"
 #include <Arduino.h>
 
-// Para indicar si el SW está presionado LOW=0
-bool leeSW(int16_t sw){
-    return digitalRead(sw) == 0;
+control_pulsadores pulsadores[] = {
+    {SW1, false}, // SW1
+    {SW2, false}, // SW2
+    {SW3, false}, // SW3
+    {SW4, false} // SW4
+};
+
+// Función para activar un pulsador
+bool activar_sw(uint8_t SW) {
+    bool presionado = digitalRead(SW) == LOW;  // Verificar si el pulsador está presionado
+    
+    for (int i = 0; i < 4; ++i) {
+        if (pulsadores[i].SW == SW) {
+            pulsadores[i].activacion = presionado;
+            //break; // Salir del bucle una vez que se ha encontrado el SW
+        } else {
+            pulsadores[i].activacion = false;
+        }
+    }
+    
+    return presionado;  // Devolver verdadero si el pulsador está presionado
 }
 
 void inicializarMEF(switch_t* sw) {
@@ -34,13 +52,9 @@ switch_t switches[] = {
 
 void actualizarMEF(switch_t* sw) {
     int val = digitalRead(sw->pin);
-    int prevVal = val;
-
+    
     switch (sw->estadoActual) {
     case ESTADO_INICIAL:
-        // Inicializar Hardware
-        //Serial.print("Estado Inicial - Switch: ");
-        //Serial.println(sw->pin);
         if (val == HIGH) {
             sw->estadoActual = ESTADO_UP;
         } else {
@@ -49,26 +63,18 @@ void actualizarMEF(switch_t* sw) {
         break;
         
     case ESTADO_UP:
-        //Serial.print("Estado UP - Switch: ");
-        //Serial.println(sw->pin);
         sw->estadoActual = ESTADO_FALLING;
         break;
         
     case ESTADO_DOWN:
-        //Serial.print("Estado DOWN - Switch: ");
-        //Serial.println(sw->pin);
         sw->estadoActual = ESTADO_RISING;
         break;
         
     case ESTADO_FALLING:
-        //Serial.print("Estado FALLING - Switch: ");
-        //Serial.println(sw->pin);
         DetectorDurante40ms(sw);
         break;
         
     case ESTADO_RISING:
-        //Serial.print("Estado RISING - Switch: ");
-        //Serial.println(sw->pin);
         DetectorDurante40ms(sw);
         break;
         
@@ -76,5 +82,4 @@ void actualizarMEF(switch_t* sw) {
         inicializarMEF(sw);
         break;
     }
-    prevVal = val;
 }
