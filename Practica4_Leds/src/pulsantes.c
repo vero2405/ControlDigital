@@ -9,22 +9,6 @@ control_pulsadores pulsadores[] = {
     {SW4, false} // SW4
 };
 
-// Función para activar un pulsador
-bool activar_sw(uint8_t SW) {
-    bool presionado = digitalRead(SW) == LOW;  // Verificar si el pulsador está presionado
-    
-    for (int i = 0; i < 4; ++i) {
-        if (pulsadores[i].SW == SW) {
-            pulsadores[i].activacion = presionado;
-            //break; // Salir del bucle una vez que se ha encontrado el SW
-        } else {
-            pulsadores[i].activacion = false;
-        }
-    }
-    
-    return presionado;  // Devolver verdadero si el pulsador está presionado
-}
-
 void inicializarMEF(switch_t* sw) {
     sw->estadoActual = ESTADO_INICIAL;
     sw->previousMillis = 0;
@@ -83,3 +67,4 @@ void actualizarMEF(switch_t* sw) {
         break;
     }
 }
+

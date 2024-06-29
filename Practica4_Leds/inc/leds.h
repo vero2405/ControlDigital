@@ -18,8 +18,4 @@ extern volatile int8_t actual_direction;
 extern volatile uint16_t previousMillis;
 extern volatile uint16_t tiempo_encendido;
 
-bool activar_led(uint8_t LED);
-void desactivar_leds(uint8_t LED);
-void cambiarLed();
-
 #endif

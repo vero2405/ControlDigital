@@ -32,6 +32,5 @@ typedef struct {
 void inicializarMEF(switch_t* sw);
 void DetectorDurante40ms(switch_t* sw);
 void actualizarMEF(switch_t* sw);
-bool activar_sw(uint8_t SW);
 
 #endif
