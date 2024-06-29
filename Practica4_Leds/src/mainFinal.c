@@ -2,9 +2,10 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "hal.h"
-#include "leds.h"
-#include "pulsantes.h"
+
+#include "../inc/hal.h"
+#include "../inc/leds.h"
+#include "../inc/pulsantes.h"
 
 
 volatile int8_t current_led_index = 0;  // Índice del LED actual

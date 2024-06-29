@@ -18,6 +18,8 @@ control_pulsadores pulsadores[] = {
     {SW4, false} // SW4
 };
 
+extern control_pulsadores pulsadores[4];
+
 // Para antirebote mediante Maquina de Estado
 
 typedef enum {

@@ -1,4 +1,5 @@
-#include "leds.h"
+#include "../inc/leds.h"
+#include "../inc/hal.h"
 #include <Arduino.h>
 
 volatile int8_t current_led_index = 0;  // Índice del LED actual
@@ -6,14 +7,17 @@ volatile int8_t current_direction = 1;  // Dirección actual
 volatile uint16_t previousMillis = 0;  // Variable para almacenar el tiempo anterior
 volatile uint16_t tiempo_encendido = 500; // Tiempo de encendido por defecto
 
+control_leds leds[4];
+control_pulsadores pulsadores[4];
 
 // Función para encender un LED
-void activar_led(uint8_t* LED) {
+bool activar_led(uint8_t LED) {
     digitalWrite(LED, HIGH);
+    return true;
 }
 
 // Función para apagar todos los LEDs excepto uno
-void desactivar_leds(uint8_t* LED) {
+void desactivar_leds(uint8_t LED) {
     for (int i = 0; i < 4; ++i) {
         if (leds[i].LED != LED) {
             digitalWrite(leds[i].LED, LOW);

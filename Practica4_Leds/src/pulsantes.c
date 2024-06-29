@@ -1,4 +1,5 @@
-#include "pulsantes.h"
+#include "../inc/pulsantes.h"
+#include "../inc/hal.h"
 #include <Arduino.h>
 
 // Para indicar si el SW está presionado LOW=0
